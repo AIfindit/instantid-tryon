@@ -1,0 +1,12 @@
+flask
+gunicorn
+torch==2.1.0+cu118
+transformers==4.36.2
+diffusers==0.25.0
+accelerate==0.21.0
+Pillow
+opencv-python
+numpy
+insightface==0.7.3
+scipy
+onnxruntime-gpu
