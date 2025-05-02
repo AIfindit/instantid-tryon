@@ -8,7 +8,7 @@ from insightface.app import FaceAnalysis
 from diffusers import DDIMScheduler, ControlNetModel
 from transformers import CLIPVisionModelWithProjection, CLIPImageProcessor
 from models.instantid.pipeline_stable_diffusion_xl_instantid import StableDiffusionXLInstantIDPipeline
-from models.instantid.utils import encode_face
+from utils import encode_face
 
 app = Flask(__name__)
 
