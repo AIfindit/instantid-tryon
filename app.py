@@ -17,7 +17,7 @@ face_analyzer = FaceAnalysis(name='buffalo_l', providers=['CUDAExecutionProvider
 face_analyzer.prepare(ctx_id=0)
 
 # Caminhos para os modelos locais
-FACE_MODEL_PATH = "checkpoints/ip-adapter.bin"
+FACE_MODEL_PATH = "checkpoints/ip-adapter/ip-adapter-plus-face_sd15.bin"
 CONTROLNET_PATH = "checkpoints/ControlNetModel"
 
 # Carregamento do modelo ControlNet
@@ -55,9 +55,14 @@ def tryon():
         image_file.save(image_path)
         reference_file.save(reference_path)
 
-        image = Image.open(image_path).convert("RGB").resize((512, 512))
-        reference = cv2.imread(reference_path)
+        # Redimensiona mantendo a altura de 512px, largura proporcional
+        original_image = Image.open(image_path).convert("RGB")
+        w, h = original_image.size
+        new_h = 512
+        new_w = int(w * (512 / h))
+        image = original_image.resize((new_w, new_h))
 
+        reference = cv2.imread(reference_path)
         faces = face_analyzer.get(reference)
         if not faces:
             return jsonify({"error": "Nenhum rosto detetado"}), 400
