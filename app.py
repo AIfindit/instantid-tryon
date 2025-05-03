@@ -16,9 +16,16 @@ face_analyzer = FaceAnalysis(name='buffalo_l', providers=['CUDAExecutionProvider
 face_analyzer.prepare(ctx_id=0)
 
 CONTROLNET_PATH = "checkpoints/ControlNetModel"
+CONTROLNET_FILE = "diffusion_pytorch_model.fp16.safetensors"  # <- nome correto
 IP_ADAPTER_PATH = "checkpoints/ip-adapter/ip-adapter-plus-face_sd15.bin"
 
-controlnet = ControlNetModel.from_pretrained(CONTROLNET_PATH, torch_dtype=torch.float16).to("cuda")
+# Carregar o ControlNet com safetensors explícito
+controlnet = ControlNetModel.from_pretrained(
+    CONTROLNET_PATH,
+    subfolder="",
+    torch_dtype=torch.float16,
+    use_safetensors=True
+).to("cuda")
 
 pipe = StableDiffusionXLInstantIDPipeline.from_pretrained(
     "stabilityai/stable-diffusion-xl-base-1.0",
