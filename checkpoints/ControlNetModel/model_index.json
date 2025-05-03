@@ -1,7 +1,5 @@
 {
-  "_class_name": "ControlNetModel",
-  "_diffusers_version": "0.14.0",
-  "architectures": [
-    "ControlNetModel"
-  ]
+  "_class_name": "IPAdapter",
+  "_diffusers_version": "0.24.0",
+  "architectures": ["IPAdapter"]
 }
