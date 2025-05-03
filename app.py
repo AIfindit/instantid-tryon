@@ -37,7 +37,11 @@ pipe = StableDiffusionXLInstantIDPipeline.from_pretrained(
 ).to("cuda")
 
 pipe.scheduler = DDIMScheduler.from_config(pipe.scheduler.config)
-pipe.load_ip_adapter("checkpoints/ip-adapter/ip-adapter-plus-face_sd15.bin")
+pipe.load_ip_adapter(
+    pretrained_model_name_or_path="checkpoints/ip-adapter",
+    subfolder="",
+    weight_name="ip-adapter-plus-face_sd15.bin"
+)
 pipe.set_ip_adapter_scale(0.6)
 
 @app.route("/tryon", methods=["POST"])
