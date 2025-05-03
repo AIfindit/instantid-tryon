@@ -24,7 +24,8 @@ controlnet = ControlNetModel.from_pretrained(
     CONTROLNET_PATH,
     subfolder="",
     torch_dtype=torch.float16,
-    use_safetensors=True
+    use_safetensors=True,
+    weight_name="diffusion_pytorch_model.safetensors"
 ).to("cuda")
 
 pipe = StableDiffusionXLInstantIDPipeline.from_pretrained(
