@@ -37,8 +37,8 @@ pipe = StableDiffusionXLInstantIDPipeline.from_pretrained(
 
 pipe.scheduler = DDIMScheduler.from_config(pipe.scheduler.config)
 pipe.load_ip_adapter(
-    pretrained_model_name_or_path="checkpoints/ip-adapter",
-    subfolder="",
+    "checkpoints/ip-adapter",  # Caminho base
+    subfolder="",              # Se estiver diretamente dentro da pasta
     weight_name="ip-adapter-plus-face_sd15.bin"
 )
 pipe.set_ip_adapter_scale(0.6)
