@@ -38,10 +38,8 @@ pipe = StableDiffusionXLInstantIDPipeline.from_pretrained(
 # Configurações do IP-Adapter
 pipe.scheduler = DDIMScheduler.from_config(pipe.scheduler.config)
 pipe.set_ip_adapter_scale(0.6)
-pipe.image_proj_model = CLIPVisionModelWithProjection.from_pretrained(
-    "checkpoints/ControlNetModel/IP-Adapter", torch_dtype=torch.float16
-).to("cuda")
-pipe.image_processor = CLIPImageProcessor.from_pretrained("checkpoints/ControlNetModel/IP-Adapter")
+pipe.load_ip_adapter("checkpoints/ip-adapter/ip-adapter-plus-face_sd15.bin")
+pipe.set_ip_adapter_scale(0.6)
 @app.route("/tryon", methods=["POST"])
 def tryon():
     try:
